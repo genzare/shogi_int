@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿	using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -7,14 +7,14 @@ public class sc_saveinput : MonoBehaviour {
 	public InputField inputip;
 	public InputField inputname;
 	public InputField inputroomno;
-	private string saveip;
-	private string savename;
-	private string saveroomno;
+	public string saveip;
+	public string savename;
+	public string saveroomno;
 
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -22,16 +22,13 @@ public class sc_saveinput : MonoBehaviour {
 	
 	}
 
-	string Saveip(){
+	public void Saveip(){
 		saveip = inputip.text;
-		return saveip;
 	}
-	string Savename(){
+	public void Savename(){
 		savename = inputname.text;
-		return savename;
 	}
-	string Saveroomno(){
+	public void Saveroomno(){
 		saveroomno = inputroomno.text;
-		return saveroomno;
 	}
 }
