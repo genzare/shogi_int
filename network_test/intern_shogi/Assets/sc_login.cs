@@ -18,19 +18,23 @@ public class sc_login : MonoBehaviour {
 
 	public void pushlogin(){
 
-		string ipaddress="0";
-		string playername;
-		string roomno;
-		ipaddress=inputcanvas.GetComponent<sc_saveinput>().saveip;
-		playername=inputcanvas.GetComponent<sc_saveinput>().savename;
-		roomno=inputcanvas.GetComponent<sc_saveinput>().saveroomno;
+		sc_connect.IPaddress=inputcanvas.GetComponent<sc_saveinput>().saveip;
+		sc_connect.name=inputcanvas.GetComponent<sc_saveinput>().savename;
+		sc_connect.roomno=int.Parse(inputcanvas.GetComponent<sc_saveinput>().saveroomno);
 
-		Debug.Log (ipaddress);
-		Debug.Log (playername);
-		Debug.Log (roomno);
-		int roomno_int = int.Parse (roomno);
-		connect.GetComponent<sc_connect> ().StartCoroutine(connect.GetComponent<sc_connect> ().Connect_post(ipaddress,playername,roomno_int));
+		Debug.Log (sc_connect.IPaddress);
+		Debug.Log (sc_connect.name);
+		Debug.Log (sc_connect.roomno);
+//		int roomno_int = int.Parse (roomno);
+		connect.GetComponent<sc_connect> ().Start_post (sc_connect.Post.LOGIN);
+	
+		//connect.GetComponent<sc_connect> ().StartCoroutine(connect.GetComponent<sc_connect> ().Connect_post(ipaddress,playername,roomno_int));
+
+
 
 	}
+
+	
+
 }
 

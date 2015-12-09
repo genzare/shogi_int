@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\intern_shogi\Assets\sc_login.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\intern_shogi\Assets\sc_vsgame.cs">
     <Files>
-      <File FileName="..\intern_shogi\Assets\sc_login.cs" Line="18" Column="2" />
+      <File FileName="..\intern_shogi\Assets\sc_connect.cs" Line="46" Column="10" />
+      <File FileName="..\intern_shogi\Assets\sc_startgame.cs" Line="20" Column="74" />
+      <File FileName="..\intern_shogi\Assets\sc_vsgame.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

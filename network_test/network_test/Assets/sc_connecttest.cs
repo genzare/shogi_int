@@ -16,7 +16,7 @@ public class sc_connecttest : MonoBehaviour {
 	
 	IEnumerator Testconnect(){
 		Debug.Log ("test1");
-		string url = "https://www.google.co.jp/webhp?hl=ja#hl=ja&q=hogehoge";
+		string url = "http://192.168.33.11:3000/plays/3/users";
 		WWW www = new WWW(url);
 		yield return www;
 		Debug.Log(www.text);
