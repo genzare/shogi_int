@@ -14,6 +14,8 @@ public class sc_saveinput : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		inputip.text = "192.168.33.11";
+		inputname.text= "player";
 
 	}
 	

@@ -48,11 +48,13 @@
   <ItemGroup>
      <Compile Include="Assets\Plugin\MiniJSON.cs" />
      <Compile Include="Assets\Script\sc_connect.cs" />
+     <Compile Include="Assets\Script\sc_fieldlock.cs" />
      <Compile Include="Assets\Script\sc_login.cs" />
      <Compile Include="Assets\Script\sc_pieces.cs" />
      <Compile Include="Assets\Script\sc_piecesType.cs" />
      <Compile Include="Assets\Script\sc_saveinput.cs" />
      <Compile Include="Assets\Script\sc_startgame.cs" />
+     <Compile Include="Assets\Script\sc_turnchange.cs" />
      <Compile Include="Assets\Script\sc_vsgame.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -16,9 +16,18 @@ public class sc_piecesType : MonoBehaviour {
 	}
 
 	public void Getsprite(string name, bool owner, bool promote){
-		Sprite test =Resources.Load<Sprite> ("60x64/" + name + owner + promote);
+		string s_owner, s_promote;
+		if (owner ^ sc_connect.lastplayer_check)
+			s_owner = "1";
+		else
+			s_owner = "0";
+		if (promote)
+			s_promote = "1";
+		else
+			s_promote = "0";
+		Sprite test =Resources.Load<Sprite> ("60x64/"+name+s_owner+s_promote);
 		this.gameObject.AddComponent<SpriteRenderer> ();
-		this.gameObject.GetComponent<SpriteRenderer> ().sprite = test;
+		this.gameObject.GetComponent<SpriteRenderer> ().sprite =test;
 
 	}
 

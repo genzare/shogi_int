@@ -1,10 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\sc_connect.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\sc_startgame.cs">
     <Files>
-      <File FileName="Assets\Script\sc_startgame.cs" Line="21" Column="3" />
-      <File FileName="Assets\Script\sc_connect.cs" Line="56" Column="18" />
-      <File FileName="Assets\Script\sc_piecesType.cs" Line="25" Column="2" />
+      <File FileName="Assets\Script\sc_startgame.cs" Line="24" Column="44" />
+      <File FileName="Assets\Script\sc_connect.cs" Line="88" Column="29" />
+      <File FileName="Assets\Script\sc_login.cs" Line="21" Column="61" />
+      <File FileName="Assets\Script\sc_pieces.cs" Line="23" Column="3" />
+      <File FileName="Assets\Script\sc_saveinput.cs" Line="18" Column="26" />
+      <File FileName="Assets\Script\sc_turnchange.cs" Line="11" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

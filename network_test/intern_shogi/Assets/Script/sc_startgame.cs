@@ -3,6 +3,8 @@ using System.Collections;
 
 public class sc_startgame : MonoBehaviour {
 	[SerializeField] GameObject connect;
+	[SerializeField] GameObject maincamera;
+	[SerializeField] GameObject timestopper;
 	// Use this for initialization
 	void Start () {
 		connect.GetComponent<sc_connect>().Start_get (sc_connect.Get.STATE);
@@ -18,8 +20,18 @@ public class sc_startgame : MonoBehaviour {
 	}
 	public void Lineup(){
 		connect.GetComponent<sc_connect> ().Start_get (sc_connect.Get.PIECIES);
+		if (sc_connect.lastplayer_check) {
+			maincamera.transform.Rotate (0, 0, 180);
+		}
+		startgame ();
 	}
+	void startgame(){
+		if (sc_connect.lastplayer_check) {
+			timestopper.SetActive(true);
+			connect.GetComponent<sc_connect> ().Start_get (sc_connect.Get.CHECK);
+		}
 
+	}
 	 
 }
 

@@ -11,13 +11,14 @@ public  class sc_connect : MonoBehaviour {
 	public static string role;
 	public static int roomno;
 	public static long play_id;
-
+	public static long user_id;
+	public static bool lastplayer_check;
 
 	[SerializeField] GameObject gamestart;
 	[SerializeField] GameObject gameboard;
+	[SerializeField] GameObject turnchanger;
 	public enum Post{ LOGIN, UPDATE, LOGOUT,};
-	public enum Get{ STATE, USERS, ID, WINNER, PIECIES};
-	public long user_id;
+	public enum Get{ STATE, USERS, CHECK, WINNER, PIECIES};
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +43,9 @@ public  class sc_connect : MonoBehaviour {
 			break;
 		case Get.USERS:
 			StartCoroutine("get_users");
+			break;
+		case Get.CHECK:
+			StartCoroutine("get_check");
 			break;
 		case Get.PIECIES:
 			StartCoroutine ("get_pieces");
@@ -80,7 +84,9 @@ public  class sc_connect : MonoBehaviour {
 		Dictionary<string,object> last_player = (Dictionary<string,object>)jsonData["last_player"];
 		long lastplayer_id=(long)last_player["user_id"];
 		string lastplayer_name = (string)last_player ["name"];
-
+		if (lastplayer_id == user_id) {
+			 lastplayer_check = true;
+		}
 		gamestart.GetComponent<sc_startgame> ().Lineup ();
 
 		Debug.Log (firstplayer_id);
@@ -88,6 +94,25 @@ public  class sc_connect : MonoBehaviour {
 		Debug.Log (lastplayer_id);
 		Debug.Log (lastplayer_name);
 	}
+
+	IEnumerator get_check(){
+		Debug.Log ("checkein");
+		for(string state="waiting";state=="waiting";){
+			yield return new WaitForSeconds (1.0f);
+			string url = "http://"+IPaddress+":3000/plays/"+play_id;
+			WWW www = new WWW (url);
+			yield return www;
+			Debug.Log(www.text);
+			Dictionary<string,object> jsonData = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
+			long turn_count = (long)jsonData["turn_count"];
+			long watcher_count = (long)jsonData["watcher_count"];
+			long turn_player = (long)jsonData["turn_player"];
+			state = (string)jsonData["state"];
+		}
+
+		turnchanger.GetComponent<sc_turnchange> ().ChangeTurn ();
+	}
+
 
 	IEnumerator get_pieces(){
 		Debug.Log ("pieces");
@@ -100,6 +125,7 @@ public  class sc_connect : MonoBehaviour {
 		for (int np=0; np<40; np++) {
 			pieces[np]=new GameObject("pieces"+np);
 			pieces[np].AddComponent<sc_pieces>();
+			pieces[np].AddComponent<BoxCollider>();
 			sc_pieces s_piece;
 			s_piece = pieces[np].GetComponent<sc_pieces> ();
 			Debug.Log(np.ToString());
@@ -113,7 +139,7 @@ public  class sc_connect : MonoBehaviour {
 		}
 
 
-//		gamestart.GetComponent<sc_startgame> ().Lineup ();
+		gamestart.GetComponent<sc_startgame> ().Lineup ();
 
 	}
 
@@ -132,7 +158,7 @@ public  class sc_connect : MonoBehaviour {
 		yield return www;
 		Debug.Log (www.text);
 		Dictionary<string,object> jsonData = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
-		long user_id = (long)jsonData["user_id"];
+		user_id = (long)jsonData["user_id"];
 		play_id = (long)jsonData["play_id"];
 		string state = (string)jsonData["state"];
 		string role = (string)jsonData["role"];
