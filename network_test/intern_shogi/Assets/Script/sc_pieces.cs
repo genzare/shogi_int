@@ -7,6 +7,7 @@ public class sc_pieces : sc_piecesType {
 	public long posx;
 	public long posy;
 	public bool promote;
+	public long pieceid;
 
 
 
@@ -22,21 +23,11 @@ public class sc_pieces : sc_piecesType {
 	void Update () {
 
 
-		if (Input.GetMouseButtonDown(0)) {
-			Ray ray = new Ray ();
-			RaycastHit hit = new RaycastHit ();
-			ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			
-			//マウスクリックした場所からRay？を飛ばし、オブジェクトがあればtrue 
-			if (Physics.Raycast (ray.origin, ray.direction, out hit, Mathf.Infinity)) {
-				Debug.Log (hit.collider.gameObject.name);
 
-			}
-		}
 	
 	}
 
-	void Setpeices(float posx, float posy){
+	public void Setpeices(float posx, float posy){
 		float masx = 0.6f;
 		float masy = 0.65f;
 		float basex = masx*4;
@@ -45,5 +36,13 @@ public class sc_pieces : sc_piecesType {
 		this.gameObject.transform.position =new Vector3 (basex-masx*(posx-1),basey-masy*(posy-1), 0);
 	}
 
+	public void AvtiveThis(){
+		//アクティブかわかりやすい表示ほしい
+
+	}
+
+	public void Movethis(){
+
+	}
 
 }

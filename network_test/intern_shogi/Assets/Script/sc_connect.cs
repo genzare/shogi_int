@@ -10,7 +10,6 @@ public  class sc_connect : MonoBehaviour {
 	public static string name;
 	public static string role;
 	public static int roomno;
-	public static long play_id;
 	public static long user_id;
 	public static bool lastplayer_check;
 
@@ -32,6 +31,12 @@ public  class sc_connect : MonoBehaviour {
 		switch (connect_kind) {
 		case Post.LOGIN:
 			StartCoroutine ("post_login");
+			break;
+		case Post.UPDATE:
+			StartCoroutine ("post_update");
+			break;
+		case Post.LOGOUT:
+			StartCoroutine ("post_logout");
 			break;
 		}
 	}
@@ -56,10 +61,10 @@ public  class sc_connect : MonoBehaviour {
 
 	IEnumerator get_state(){
 		Debug.Log ("statein");
-		Debug.Log (play_id);
+		Debug.Log (sc_vsgame.play_id);
 		for(string state="waiting";state=="waiting";){
 			yield return new WaitForSeconds (1.0f);
-			string url = "http://"+IPaddress+":3000/plays/"+play_id+"/state";
+			string url = "http://"+IPaddress+":3000/plays/"+sc_vsgame.play_id+"/state";
 			WWW www = new WWW (url);
 			yield return www;
 			Debug.Log(www.text);
@@ -71,8 +76,8 @@ public  class sc_connect : MonoBehaviour {
 
 	IEnumerator get_users(){
 		Debug.Log ("userin");
-		Debug.Log(play_id);
-		string url = "http://"+IPaddress+":3000/plays/"+play_id+"/users";
+		Debug.Log(sc_vsgame.play_id);
+		string url = "http://"+IPaddress+":3000/plays/"+sc_vsgame.play_id+"/users";
 		WWW www = new WWW (url);
 		yield return www;
 		Debug.Log(www.text);
@@ -87,6 +92,7 @@ public  class sc_connect : MonoBehaviour {
 		if (lastplayer_id == user_id) {
 			 lastplayer_check = true;
 		}
+		turnchanger.GetComponent<sc_turnchange> ().Start_check ();
 		gamestart.GetComponent<sc_startgame> ().Lineup ();
 
 		Debug.Log (firstplayer_id);
@@ -97,26 +103,32 @@ public  class sc_connect : MonoBehaviour {
 
 	IEnumerator get_check(){
 		Debug.Log ("checkein");
-		for(string state="waiting";state=="waiting";){
+		for(string turn_player="0";turn_player!=(user_id).ToString();){
 			yield return new WaitForSeconds (1.0f);
-			string url = "http://"+IPaddress+":3000/plays/"+play_id;
+			string url = "http://"+IPaddress+":3000/plays/"+sc_vsgame.play_id;
 			WWW www = new WWW (url);
 			yield return www;
 			Debug.Log(www.text);
 			Dictionary<string,object> jsonData = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 			long turn_count = (long)jsonData["turn_count"];
 			long watcher_count = (long)jsonData["watcher_count"];
-			long turn_player = (long)jsonData["turn_player"];
-			state = (string)jsonData["state"];
+			turn_player = ((long)jsonData["turn_player"]).ToString();
+			string state = (string)jsonData["state"];
 		}
 
+		foreach ( Transform n in gameboard.transform )
+		{
+			GameObject.Destroy(n.gameObject);
+		}
+
+		Start_get (Get.PIECIES);
 		turnchanger.GetComponent<sc_turnchange> ().ChangeTurn ();
 	}
 
 
 	IEnumerator get_pieces(){
 		Debug.Log ("pieces");
-		string url = "http://"+IPaddress+":3000/plays/"+play_id+"/pieces";
+		string url = "http://"+IPaddress+":3000/plays/"+sc_vsgame.play_id+"/pieces";
 		WWW www = new WWW (url);
 		yield return www;
 		Debug.Log(www.text);
@@ -124,6 +136,7 @@ public  class sc_connect : MonoBehaviour {
 		GameObject[] pieces = new GameObject[40];
 		for (int np=0; np<40; np++) {
 			pieces[np]=new GameObject("pieces"+np);
+			pieces[np].transform.parent=gameboard.transform;
 			pieces[np].AddComponent<sc_pieces>();
 			pieces[np].AddComponent<BoxCollider>();
 			sc_pieces s_piece;
@@ -136,17 +149,14 @@ public  class sc_connect : MonoBehaviour {
 			s_piece.posx = (long)d_piece ["posx"];
 			s_piece.posy = (long)d_piece ["posy"];
 			s_piece.promote = (bool)d_piece ["promote"];
+			s_piece.pieceid = np+1;
 		}
 
-
-		gamestart.GetComponent<sc_startgame> ().Lineup ();
-
-	}
-
-	void SavePieceData(Dictionary<string,object> jsonData){
-
+	
 
 	}
+
+
 
 
 	IEnumerator post_login(){
@@ -159,12 +169,46 @@ public  class sc_connect : MonoBehaviour {
 		Debug.Log (www.text);
 		Dictionary<string,object> jsonData = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 		user_id = (long)jsonData["user_id"];
-		play_id = (long)jsonData["play_id"];
+		sc_vsgame.play_id = (long)jsonData["play_id"];
 		string state = (string)jsonData["state"];
 		string role = (string)jsonData["role"];
-		Debug.Log(play_id);
+		Debug.Log(sc_vsgame.play_id);
 
 		Application.LoadLevel(1);
+
+	}
+	IEnumerator post_update(){
+		sc_piecemove  piecemove=gameboard.GetComponent<sc_piecemove>();
+		string url = "http://" + sc_connect.IPaddress + ":3000/plays/update";
+		WWWForm form = new WWWForm ();
+		form.AddField ("play_id", (sc_vsgame.play_id).ToString());
+		form.AddField ("user_id", (sc_connect.user_id).ToString());
+		form.AddField ("move_id", (piecemove.move_id).ToString());
+		form.AddField ("posx", (piecemove.posx).ToString());
+		form.AddField ("posy", (piecemove.posy).ToString());
+		form.AddField ("promote", (piecemove.promote).ToString ());
+		form.AddField ("get_id", (piecemove.get_id).ToString());
+		WWW www = new WWW (url, form);
+		yield return www;
+		Debug.Log (www.text);
+
+		turnchanger.GetComponent<sc_turnchange>().ChangeTurn();
+
+	}
+
+	IEnumerator post_logout(){
+		string url = "http://" + sc_connect.IPaddress + ":3000/users/logout";
+		WWWForm form = new WWWForm ();
+		form.AddField ("play_id", (sc_vsgame.play_id).ToString());
+		form.AddField ("user_id", (sc_connect.user_id).ToString());
+		WWW www = new WWW (url, form);
+		yield return www;
+		Debug.Log (www.text);
+		
+		Application.LoadLevel(0);
+		
+
+
 
 	}
 }

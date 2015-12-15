@@ -49,9 +49,13 @@
      <Compile Include="Assets\Plugin\MiniJSON.cs" />
      <Compile Include="Assets\Script\sc_connect.cs" />
      <Compile Include="Assets\Script\sc_fieldlock.cs" />
+     <Compile Include="Assets\Script\sc_gameboard.cs" />
+     <Compile Include="Assets\Script\sc_giveup.cs" />
      <Compile Include="Assets\Script\sc_login.cs" />
+     <Compile Include="Assets\Script\sc_piecemove.cs" />
      <Compile Include="Assets\Script\sc_pieces.cs" />
      <Compile Include="Assets\Script\sc_piecesType.cs" />
+     <Compile Include="Assets\Script\sc_player.cs" />
      <Compile Include="Assets\Script\sc_saveinput.cs" />
      <Compile Include="Assets\Script\sc_startgame.cs" />
      <Compile Include="Assets\Script\sc_turnchange.cs" />

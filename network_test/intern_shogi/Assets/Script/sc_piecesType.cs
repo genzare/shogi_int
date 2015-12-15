@@ -31,4 +31,6 @@ public class sc_piecesType : MonoBehaviour {
 
 	}
 
+
+
 }
