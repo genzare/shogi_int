@@ -47,6 +47,8 @@ public class sc_pieces : sc_piecesType {
 			gameboard.GetComponent<sc_gameboard>().motispace++;
 			}
 		}
+
+
 		this.gameObject.transform.position =new Vector3 (basex-masx*(posx-1),basey-masy*(posy-1), 0);
 	}
 

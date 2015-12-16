@@ -61,6 +61,8 @@
      <Compile Include="Assets\Script\sc_startgame.cs" />
      <Compile Include="Assets\Script\sc_turnchange.cs" />
      <Compile Include="Assets\Script\sc_vsgame.cs" />
+     <Compile Include="Assets\Script\secletgame\sc_mybullet.cs" />
+     <Compile Include="Assets\Script\secletgame\sc_playermove.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

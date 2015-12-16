@@ -5,8 +5,9 @@ using System.Collections;
 public class sc_massage : MonoBehaviour {
 
 	[SerializeField] GameObject connect;
+	[SerializeField]  GameObject secletbutton;
 	public GameObject textobject;
-	public enum Windowtext{WIN,LOSE,ESCAPED};
+	public enum Windowtext{WIN,LOSE,ESCAPED,READY};
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +34,14 @@ public class sc_massage : MonoBehaviour {
 		case Windowtext.LOSE:
 			textobject.GetComponent<Text>().text="敗北……";
 			break;
+		case Windowtext.READY:
+			textobject.GetComponent<Text>().text="Ready???";
+			secletbutton.SetActive(true);
+			break;
 		}
+	}
+	public void StartSTG(){
+		Application.LoadLevel(2);
 	}
 
 }

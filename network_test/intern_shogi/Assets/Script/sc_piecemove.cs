@@ -11,6 +11,7 @@ public class sc_piecemove : MonoBehaviour {
 	public long get_id;
 
 	[SerializeField] GameObject connect;
+	[SerializeField] GameObject textwindow;
 	int motispace;
 
 	// Use this for initialization
@@ -37,8 +38,13 @@ public class sc_piecemove : MonoBehaviour {
 				click_piece.GetComponent<sc_pieces>().GetSprite(name,owner,promote);
 				click_piece.GetComponent<sc_pieces>().SetPeices(convertboardposition.x,convertboardposition.y);
 				Debug.Log(get_id);
-
 				activepieceexist=false;
+
+				if (convertboardposition.y == 5 && (convertboardposition.x == 10 || convertboardposition.x== 0)) {
+					textwindow.SetActive (true);
+					textwindow.GetComponent<sc_massage> ().ChangeText (sc_massage.Windowtext.WIN);
+				}
+
 				connect.GetComponent<sc_connect> ().Start_post (sc_connect.Post.UPDATE);
 }
 			else{//駒決定
