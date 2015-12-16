@@ -15,9 +15,9 @@ public class sc_piecesType : MonoBehaviour {
 	
 	}
 
-	public void Getsprite(string name, bool owner, bool promote){
+	public void GetSprite(string name, bool owner, bool promote){
 		string s_owner, s_promote;
-		if (owner ^ sc_connect.lastplayer_check)
+		if (owner ^ sc_connect.lastplayer_check) //オーナーと先手後手で駒の向きチェック
 			s_owner = "1";
 		else
 			s_owner = "0";

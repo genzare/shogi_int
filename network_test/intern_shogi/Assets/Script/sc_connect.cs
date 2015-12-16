@@ -9,7 +9,6 @@ public  class sc_connect : MonoBehaviour {
 	public static string IPaddress;
 	public static string name;
 	public static string role;
-	public static int roomno;
 	public static long user_id;
 	public static bool lastplayer_check;
 
@@ -19,6 +18,7 @@ public  class sc_connect : MonoBehaviour {
 	[SerializeField] GameObject textwindow;
 	public enum Post{ LOGIN, UPDATE, LOGOUT};
 	public enum Get{ STATE, USERS, CHECK, WINNER, PIECIES};
+	public int roomno;
 
 	// Use this for initialization
 	void Start () {
@@ -191,7 +191,7 @@ public  class sc_connect : MonoBehaviour {
 		string url = "http://" + sc_connect.IPaddress + ":3000/users/login";
 		WWWForm form = new WWWForm ();
 		form.AddField ("name", sc_connect.name);
-		form.AddField ("room_no", sc_connect.roomno);
+		form.AddField ("room_no", roomno);
 		WWW www = new WWW (url, form);
 		yield return www;
 		Debug.Log (www.text);

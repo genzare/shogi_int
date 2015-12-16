@@ -17,14 +17,14 @@ public class sc_login : MonoBehaviour {
 	}
 
 	public void pushlogin(){
-
+		int roomno = int.Parse (inputcanvas.GetComponent<sc_saveinput> ().saveroomno);
 		sc_connect.IPaddress=inputcanvas.GetComponent<sc_saveinput>().saveip;
 		sc_connect.name=inputcanvas.GetComponent<sc_saveinput>().savename;
-		sc_connect.roomno=int.Parse(inputcanvas.GetComponent<sc_saveinput>().saveroomno);
+		connect.GetComponent<sc_connect>().roomno=roomno;
 
 		Debug.Log (sc_connect.IPaddress);
 		Debug.Log (sc_connect.name);
-		Debug.Log (sc_connect.roomno);
+		Debug.Log (roomno);
 //		int roomno_int = int.Parse (roomno);
 		connect.GetComponent<sc_connect> ().Start_post (sc_connect.Post.LOGIN);
 	

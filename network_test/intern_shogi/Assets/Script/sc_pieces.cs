@@ -14,7 +14,7 @@ public class sc_pieces : sc_piecesType {
 	// Use this for initialization
 	void Start () {
 
-		Getsprite (name, owner, promote);
+		GetSprite (name, owner, promote);
 		Setpeices (posx,posy);
 	
 	}

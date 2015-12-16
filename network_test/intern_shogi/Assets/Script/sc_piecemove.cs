@@ -26,11 +26,14 @@ public class sc_piecemove : MonoBehaviour {
 				Vector3 ClickMousePosition=(Input.mousePosition);
 				Vector3 convertboardposition=ConvertCoodinate(ClickMousePosition);
 				Debug.Log(convertboardposition);
-				get_id=Getotherpiece(ClickMousePosition);
+				get_id=GetOtherpiece(ClickMousePosition);
 				posx=(long)convertboardposition.x;
 				posy=(long)convertboardposition.y;
-				promote =false;
+				promote =Input.GetKey(KeyCode.LeftShift);  // 無理やり成り実装（仮
 				move_id=click_piece.GetComponent<sc_pieces>().pieceid;
+				string name=click_piece.GetComponent<sc_pieces>().name;
+				bool owner=click_piece.GetComponent<sc_pieces>().owner;
+				click_piece.GetComponent<sc_pieces>().GetSprite(name,owner,promote);
 				click_piece.GetComponent<sc_pieces>().Setpeices(convertboardposition.x,convertboardposition.y);
 				Debug.Log(get_id);
 
@@ -85,7 +88,7 @@ public class sc_piecemove : MonoBehaviour {
 		return clickboardposition;
 		
 	}
-	long Getotherpiece(Vector3 Checkpoint){
+	long GetOtherpiece(Vector3 Checkpoint){
 		long get_id = -1;
 		Ray ray = new Ray ();
 		RaycastHit hit = new RaycastHit ();
@@ -101,6 +104,7 @@ public class sc_piecemove : MonoBehaviour {
 		}
 		return get_id;	
 	}
+
 
 
 }
