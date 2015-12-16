@@ -52,6 +52,7 @@
      <Compile Include="Assets\Script\sc_gameboard.cs" />
      <Compile Include="Assets\Script\sc_giveup.cs" />
      <Compile Include="Assets\Script\sc_login.cs" />
+     <Compile Include="Assets\Script\sc_massage.cs" />
      <Compile Include="Assets\Script\sc_piecemove.cs" />
      <Compile Include="Assets\Script\sc_pieces.cs" />
      <Compile Include="Assets\Script\sc_piecesType.cs" />

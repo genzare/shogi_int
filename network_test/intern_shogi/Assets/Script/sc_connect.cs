@@ -16,7 +16,8 @@ public  class sc_connect : MonoBehaviour {
 	[SerializeField] GameObject gamestart;
 	[SerializeField] GameObject gameboard;
 	[SerializeField] GameObject turnchanger;
-	public enum Post{ LOGIN, UPDATE, LOGOUT,};
+	[SerializeField] GameObject textwindow;
+	public enum Post{ LOGIN, UPDATE, LOGOUT};
 	public enum Get{ STATE, USERS, CHECK, WINNER, PIECIES};
 
 	// Use this for initialization
@@ -52,9 +53,13 @@ public  class sc_connect : MonoBehaviour {
 		case Get.CHECK:
 			StartCoroutine("get_check");
 			break;
+		case Get.WINNER:
+			StartCoroutine("get_winner");
+				break;
 		case Get.PIECIES:
 			StartCoroutine ("get_pieces");
 			break;
+		
 		}
 	}
 
@@ -114,6 +119,13 @@ public  class sc_connect : MonoBehaviour {
 			long watcher_count = (long)jsonData["watcher_count"];
 			turn_player = ((long)jsonData["turn_player"]).ToString();
 			string state = (string)jsonData["state"];
+			if (state == "exit"){
+				textwindow.SetActive(true);
+				textwindow.GetComponent<sc_massage>().Changetext(sc_massage.Windowtext.ESCAPED);
+			}
+			else if(state == "finish"){
+				Start_get(Get.WINNER);
+			}
 		}
 
 		foreach ( Transform n in gameboard.transform )
@@ -124,6 +136,22 @@ public  class sc_connect : MonoBehaviour {
 		Start_get (Get.PIECIES);
 		turnchanger.GetComponent<sc_turnchange> ().ChangeTurn ();
 	}
+
+	IEnumerator get_winner(){
+		Debug.Log ("winnerin");
+		string url = "http://"+IPaddress+":3000/plays/"+sc_vsgame.play_id+"/winner";
+		WWW www = new WWW (url);
+		yield return www;
+		Debug.Log(www.text);
+		Dictionary<string,object> jsonData = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
+		long winner = (long)jsonData["winner"];
+		textwindow.SetActive (true);
+		if (winner == user_id)
+			textwindow.GetComponent<sc_massage> ().Changetext (sc_massage.Windowtext.WIN);
+		else
+			textwindow.GetComponent<sc_massage> ().Changetext (sc_massage.Windowtext.LOSE);
+	}
+
 
 
 	IEnumerator get_pieces(){
