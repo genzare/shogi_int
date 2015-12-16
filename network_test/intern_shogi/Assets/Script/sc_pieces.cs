@@ -11,11 +11,11 @@ public class sc_pieces : sc_piecesType {
 
 
 
+
 	// Use this for initialization
 	void Start () {
-
 		GetSprite (name, owner, promote);
-		Setpeices (posx,posy);
+		SetPeices (posx,posy);
 	
 	}
 	
@@ -27,12 +27,18 @@ public class sc_pieces : sc_piecesType {
 	
 	}
 
-	public void Setpeices(float posx, float posy){
+	public void SetPeices(float posx, float posy){ //マスを座標に変換しつつ配置
 		float masx = 0.6f;
 		float masy = 0.65f;
 		float basex = masx*4;
 		float basey = masy*4;
 	
+		if (posy == 0){
+			Debug.Log("motiIn");
+			GameObject gameboard = GameObject.Find("gameboard");
+			posx = gameboard.GetComponent<sc_gameboard>().motispace;
+			gameboard.GetComponent<sc_gameboard>().motispace++;
+		}
 		this.gameObject.transform.position =new Vector3 (basex-masx*(posx-1),basey-masy*(posy-1), 0);
 	}
 
@@ -40,9 +46,5 @@ public class sc_pieces : sc_piecesType {
 		//アクティブかわかりやすい表示ほしい
 
 	}
-
-	public void Movethis(){
-
-	}
-
+	
 }

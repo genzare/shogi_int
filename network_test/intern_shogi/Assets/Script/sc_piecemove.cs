@@ -11,6 +11,7 @@ public class sc_piecemove : MonoBehaviour {
 	public long get_id;
 
 	[SerializeField] GameObject connect;
+	int motispace;
 
 	// Use this for initialization
 	void Start () {
@@ -34,7 +35,7 @@ public class sc_piecemove : MonoBehaviour {
 				string name=click_piece.GetComponent<sc_pieces>().name;
 				bool owner=click_piece.GetComponent<sc_pieces>().owner;
 				click_piece.GetComponent<sc_pieces>().GetSprite(name,owner,promote);
-				click_piece.GetComponent<sc_pieces>().Setpeices(convertboardposition.x,convertboardposition.y);
+				click_piece.GetComponent<sc_pieces>().SetPeices(convertboardposition.x,convertboardposition.y);
 				Debug.Log(get_id);
 
 				activepieceexist=false;
@@ -88,7 +89,7 @@ public class sc_piecemove : MonoBehaviour {
 		return clickboardposition;
 		
 	}
-	long GetOtherpiece(Vector3 Checkpoint){
+	long GetOtherpiece(Vector3 Checkpoint){ 
 		long get_id = -1;
 		Ray ray = new Ray ();
 		RaycastHit hit = new RaycastHit ();
@@ -99,7 +100,11 @@ public class sc_piecemove : MonoBehaviour {
 			GameObject otherpiece = transform.FindChild (hit.collider.gameObject.name).gameObject;
 			if (otherpiece != click_piece){
 				get_id=otherpiece.GetComponent<sc_pieces>().pieceid;
-				otherpiece.GetComponent<sc_pieces>().Setpeices(0,0);
+				otherpiece.GetComponent<sc_pieces>().SetPeices(0,0);
+				string name =otherpiece.GetComponent<sc_pieces>().name;
+				bool owner = !otherpiece.GetComponent<sc_pieces>().owner;
+				bool promote = false;
+				otherpiece.GetComponent<sc_pieces>().GetSprite(name,owner,promote);	
 			}
 		}
 		return get_id;	

@@ -97,7 +97,7 @@ public  class sc_connect : MonoBehaviour {
 		if (lastplayer_id == user_id) {
 			 lastplayer_check = true;
 		}
-		turnchanger.GetComponent<sc_turnchange> ().Start_check ();
+		turnchanger.GetComponent<sc_turnchange> ().StartCheck ();
 		gamestart.GetComponent<sc_startgame> ().Lineup ();
 
 		Debug.Log (firstplayer_id);
@@ -121,7 +121,7 @@ public  class sc_connect : MonoBehaviour {
 			string state = (string)jsonData["state"];
 			if (state == "exit"){
 				textwindow.SetActive(true);
-				textwindow.GetComponent<sc_massage>().Changetext(sc_massage.Windowtext.ESCAPED);
+				textwindow.GetComponent<sc_massage>().ChangeText(sc_massage.Windowtext.ESCAPED);
 			}
 			else if(state == "finish"){
 				Start_get(Get.WINNER);
@@ -132,7 +132,7 @@ public  class sc_connect : MonoBehaviour {
 		{
 			GameObject.Destroy(n.gameObject);
 		}
-
+		gameboard.GetComponent<sc_gameboard> ().motispace = 0;
 		Start_get (Get.PIECIES);
 		turnchanger.GetComponent<sc_turnchange> ().ChangeTurn ();
 	}
@@ -147,9 +147,9 @@ public  class sc_connect : MonoBehaviour {
 		long winner = (long)jsonData["winner"];
 		textwindow.SetActive (true);
 		if (winner == user_id)
-			textwindow.GetComponent<sc_massage> ().Changetext (sc_massage.Windowtext.WIN);
+			textwindow.GetComponent<sc_massage> ().ChangeText (sc_massage.Windowtext.WIN);
 		else
-			textwindow.GetComponent<sc_massage> ().Changetext (sc_massage.Windowtext.LOSE);
+			textwindow.GetComponent<sc_massage> ().ChangeText (sc_massage.Windowtext.LOSE);
 	}
 
 

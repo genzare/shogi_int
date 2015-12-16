@@ -18,14 +18,14 @@ public class sc_massage : MonoBehaviour {
 	
 	}
 
-	public void Windowlogout(){
+	public void WindowLogout(){
 		connect.GetComponent<sc_connect> ().Start_post (sc_connect.Post.LOGOUT);
 	}
 
-	public void Changetext(Windowtext textkind){
+	public void ChangeText(Windowtext textkind){
 		switch (textkind) {
 		case Windowtext.ESCAPED:
-			textobject.GetComponent<Text> ().text = "相手が退出しました";
+			textobject.GetComponent<Text> ().text = "相手が降参しました";
 			break;
 		case Windowtext.WIN:
 			textobject.GetComponent<Text>().text="勝利！！";

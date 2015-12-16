@@ -16,7 +16,7 @@ public class sc_login : MonoBehaviour {
 	
 	}
 
-	public void pushlogin(){
+	public void PushLogin(){
 		int roomno = int.Parse (inputcanvas.GetComponent<sc_saveinput> ().saveroomno);
 		sc_connect.IPaddress=inputcanvas.GetComponent<sc_saveinput>().saveip;
 		sc_connect.name=inputcanvas.GetComponent<sc_saveinput>().savename;
