@@ -36,8 +36,16 @@ public class sc_pieces : sc_piecesType {
 		if (posy == 0){
 			Debug.Log("motiIn");
 			GameObject gameboard = GameObject.Find("gameboard");
+			if (sc_connect.lastplayer_check ^ owner){
+				Debug.Log("haittetaraokasi");
+				posx = gameboard.GetComponent<sc_gameboard>().motispacelast; //とった駒整列
+				posy=10;
+				gameboard.GetComponent<sc_gameboard>().motispacelast++;
+			}
+			else{
 			posx = gameboard.GetComponent<sc_gameboard>().motispace; //とった駒整列
 			gameboard.GetComponent<sc_gameboard>().motispace++;
+			}
 		}
 		this.gameObject.transform.position =new Vector3 (basex-masx*(posx-1),basey-masy*(posy-1), 0);
 	}

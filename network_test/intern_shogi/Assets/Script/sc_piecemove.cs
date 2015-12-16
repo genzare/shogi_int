@@ -100,10 +100,11 @@ public class sc_piecemove : MonoBehaviour {
 			GameObject otherpiece = transform.FindChild (hit.collider.gameObject.name).gameObject;
 			if (otherpiece != click_piece){
 				get_id=otherpiece.GetComponent<sc_pieces>().pieceid;
-				otherpiece.GetComponent<sc_pieces>().SetPeices(0,0);
 				string name =otherpiece.GetComponent<sc_pieces>().name; //ここ持ち駒用無理やり向き変更
 				bool owner = !otherpiece.GetComponent<sc_pieces>().owner;
+				otherpiece.GetComponent<sc_pieces>().owner=!otherpiece.GetComponent<sc_pieces>().owner;
 				bool promote = false;
+				otherpiece.GetComponent<sc_pieces>().SetPeices(0,0);
 				otherpiece.GetComponent<sc_pieces>().GetSprite(name,owner,promote);	
 			}
 		}

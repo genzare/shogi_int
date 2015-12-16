@@ -133,6 +133,7 @@ public  class sc_connect : MonoBehaviour {
 			GameObject.Destroy(n.gameObject);
 		}
 		gameboard.GetComponent<sc_gameboard> ().motispace = 0;
+		gameboard.GetComponent<sc_gameboard> ().motispacelast = 0;
 		Start_get (Get.PIECIES);
 		turnchanger.GetComponent<sc_turnchange> ().ChangeTurn ();
 	}

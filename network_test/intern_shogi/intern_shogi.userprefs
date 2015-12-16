@@ -1,19 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\sc_pieces.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Script\sc_gameboard.cs">
     <Files>
-      <File FileName="Assets\Script\sc_connect.cs" Line="31" Column="21" />
-      <File FileName="Assets\Script\sc_gameboard.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\sc_connect.cs" Line="135" Column="57" />
+      <File FileName="Assets\Script\sc_gameboard.cs" Line="8" Column="2" />
       <File FileName="Assets\Script\sc_piecesType.cs" Line="18" Column="18" />
-      <File FileName="Assets\Script\sc_piecemove.cs" Line="27" Column="71" />
-      <File FileName="Assets\Script\sc_pieces.cs" Line="30" Column="18" />
-      <File FileName="Assets\Script\sc_turnchange.cs" Line="1" Column="1" />
-      <File FileName="Assets\Script\sc_player.cs" Line="1" Column="1" />
+      <File FileName="Assets\Script\sc_piecemove.cs" Line="104" Column="77" />
+      <File FileName="Assets\Script\sc_pieces.cs" Line="39" Column="69" />
+      <File FileName="Assets\Script\sc_turnchange.cs" Line="19" Column="20" />
       <File FileName="Assets\Script\sc_vsgame.cs" Line="4" Column="38" />
-      <File FileName="Assets\Script\sc_massage.cs" Line="18" Column="2" />
-      <File FileName="Assets\Script\sc_login.cs" Line="34" Column="1" />
+      <File FileName="Assets\Script\sc_massage.cs" Line="28" Column="50" />
       <File FileName="Assets\Script\sc_saveinput.cs" Line="1" Column="1" />
-      <File FileName="c:\Users\intern\Documents\GitHub\shogi_intern\network_test\intern_shogi\Assets\Script\sc_giveup.cs" Line="21" Column="46" />
+      <File FileName="c:\Users\intern\Documents\GitHub\shogi_intern\network_test\intern_shogi\Assets\Script\sc_giveup.cs" Line="19" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
