@@ -36,14 +36,14 @@ public class sc_pieces : sc_piecesType {
 		if (posy == 0){
 			Debug.Log("motiIn");
 			GameObject gameboard = GameObject.Find("gameboard");
-			posx = gameboard.GetComponent<sc_gameboard>().motispace;
+			posx = gameboard.GetComponent<sc_gameboard>().motispace; //とった駒整列
 			gameboard.GetComponent<sc_gameboard>().motispace++;
 		}
 		this.gameObject.transform.position =new Vector3 (basex-masx*(posx-1),basey-masy*(posy-1), 0);
 	}
 
 	public void AvtiveThis(){
-		//アクティブかわかりやすい表示ほしい
+		//アクティブかわかりやすい表示ほしかった
 
 	}
 	

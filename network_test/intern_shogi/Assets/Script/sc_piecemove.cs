@@ -101,7 +101,7 @@ public class sc_piecemove : MonoBehaviour {
 			if (otherpiece != click_piece){
 				get_id=otherpiece.GetComponent<sc_pieces>().pieceid;
 				otherpiece.GetComponent<sc_pieces>().SetPeices(0,0);
-				string name =otherpiece.GetComponent<sc_pieces>().name;
+				string name =otherpiece.GetComponent<sc_pieces>().name; //ここ持ち駒用無理やり向き変更
 				bool owner = !otherpiece.GetComponent<sc_pieces>().owner;
 				bool promote = false;
 				otherpiece.GetComponent<sc_pieces>().GetSprite(name,owner,promote);	
